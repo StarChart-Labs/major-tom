@@ -3,7 +3,9 @@ buildscript {
         maven { url 'https://plugins.gradle.org/m2/' }
     }
     dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
         classpath 'com.netflix.nebula:nebula-dependency-recommender:4.2.0'
+        classpath 'com.netflix.nebula:nebula-publishing-plugin:4.2.0'
         classpath 'org.starchartlabs.flare:flare-operations-plugins:2.0.0'
         classpath 'org.starchartlabs.flare:flare-publishing-plugins:1.0.0'
     }
@@ -46,6 +48,31 @@ subprojects{
     test {
         useTestNG() {
             useDefaultListeners = true
+        }
+    }
+    
+    // Apply module naming to all projects
+    // Add LICENSE so it is included in all JARs, as well as dependent licenses, fulfilling the "distributions include license" requirement
+    jar {
+        manifest {
+            attributes("Automatic-Module-Name": "${project.group}.${project.name}".replaceAll("-", "."))
+        }
+        
+        from("${rootDir}"){
+            include 'LICENSE'
+        }
+    }
+    
+    // All projects should provide source code and javadoc, and upload these with any released artifacts
+    sourcesJar {
+        from("${rootDir}"){
+            include 'LICENSE'
+        }
+    }
+
+    javadocJar{
+        from("${rootDir}"){
+            include 'LICENSE'
         }
     }
 }

@@ -1,6 +1,66 @@
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'nebula.maven-base-publish'
+apply plugin: 'nebula.maven-dependencies'
+apply plugin: 'org.starchartlabs.flare.published-project'
+
 //Dependency versions managed in $rootDir/dependencies.properties
 dependencies {
     compile 'com.google.code.findbugs:jsr305'
     compile 'com.google.code.gson:gson'
     compile 'org.starchartlabs.alloy:alloy-core'
+}
+
+// If not a remote run, publish to local only
+if(!project.hasProperty('remoteDeploy')){
+    publishing {
+        repositories {
+            mavenLocal()
+        }
+    }
+}
+
+publishedInfo{
+    url = 'https://github.com/StarChart-Labs/major-tom'
+  
+    scm{
+        github 'StarChart-Labs', 'major-tom'
+    }
+  
+    licenses{
+        mit('repo')
+    }
+  
+    developers{
+        github 'romeara', 'Ryan OMeara'
+    }
+}
+
+bintray {
+    user = System.getProperty('bintray_user')
+    key = System.getProperty('bintray_key')
+    publications = [ 'nebula' ]
+
+    if(!project.hasProperty('remoteDeploy')){
+        dryRun = true
+    }
+
+    pkg {
+        repo = 'major-tom'
+        name = "${project.name}"
+        userOrg = 'starchart-labs'
+        licenses = ['MIT']
+        vcsUrl = 'https://github.com/StarChart-Labs/major-tom'
+
+        version {
+            name = "${project.version}"
+            desc = "${project.name} release ${project.version} final"
+            released  = new Date()
+            vcsTag = "${project.version}"
+
+            gpg {
+                sign = true
+            }
+        }
+    }
 }
