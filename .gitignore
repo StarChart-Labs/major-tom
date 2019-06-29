@@ -1,3 +1,6 @@
 /.gradle/
 /.project
 /.settings/
+/.serverless/
+/node_modules/
+/package-lock.json
