@@ -12,6 +12,12 @@ package org.starchartlabs.majortom.event.handler.slack;
 
 import java.util.Objects;
 
+/**
+ * Represents the various colors which may be used with Slack message attachments for additional meaning
+ *
+ * @author romeara
+ * @since 0.1.0
+ */
 public enum AttachmentColor {
 
     GOOD("good"),

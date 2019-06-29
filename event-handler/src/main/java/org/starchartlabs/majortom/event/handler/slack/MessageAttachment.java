@@ -24,6 +24,12 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
+/**
+ * Represents the JSON form sent to Slack when posting a message with "attachments"
+ *
+ * @author romeara
+ * @since 0.1.0
+ */
 public class MessageAttachment {
 
     private static final Gson GSON = new GsonBuilder()

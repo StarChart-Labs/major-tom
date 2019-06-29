@@ -37,6 +37,12 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+/**
+ * Logic which handles receiving events from AWS SNS and dispatching them appropriately
+ *
+ * @author romeara
+ * @since 0.1.0
+ */
 public class Handler implements RequestHandler<SNSEvent, Void> {
 
     private static final String PARAMETER_STORE_SLACK_URL = "SLACK_URL_SSM";

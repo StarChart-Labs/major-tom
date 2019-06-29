@@ -10,6 +10,12 @@
  */
 package org.starchartlabs.majortom.event.model;
 
+/**
+ * Represents various levels of importance a notification may be sent with
+ *
+ * @author romeara
+ * @since 0.1.0
+ */
 public enum NotificationLevel {
 
     GOOD, WARNING, DANGER;

@@ -20,6 +20,12 @@ import org.starchartlabs.alloy.core.MoreObjects;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+/**
+ * Represents the JSON form sent to Slack to post a message
+ *
+ * @author romeara
+ * @since 0.1.0
+ */
 public class Message {
 
     private static final Gson GSON = new GsonBuilder()

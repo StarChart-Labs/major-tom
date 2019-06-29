@@ -19,6 +19,12 @@ import org.starchartlabs.alloy.core.MoreObjects;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+/**
+ * Represents a message and it's importance level that should be dispatched to the subscribing organization
+ *
+ * @author romeara
+ * @since 0.1.0
+ */
 public class Notification {
 
     public static final String SUBJECT = Notification.class.getName() + ":1";
