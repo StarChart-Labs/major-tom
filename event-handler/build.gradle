@@ -1,3 +1,5 @@
+description='Main processing logic for Major Tom system'
+
 //Dependency versions managed in $rootDir/dependencies.properties
 dependencies {
     compile project(':event-model')

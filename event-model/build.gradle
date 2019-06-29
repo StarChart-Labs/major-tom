@@ -4,6 +4,8 @@ apply plugin: 'nebula.maven-base-publish'
 apply plugin: 'nebula.maven-dependencies'
 apply plugin: 'org.starchartlabs.flare.published-project'
 
+description='Models events which may be sent to the Major Tom system by external clients'
+
 //Dependency versions managed in $rootDir/dependencies.properties
 dependencies {
     compile 'com.google.code.findbugs:jsr305'
