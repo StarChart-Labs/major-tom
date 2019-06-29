@@ -18,10 +18,13 @@ import java.util.function.Supplier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.starchartlabs.alloy.core.Suppliers;
+import org.starchartlabs.machete.sns.SnsEvents;
 import org.starchartlabs.machete.ssm.parameter.StringParameter;
 import org.starchartlabs.majortom.event.handler.slack.AttachmentColor;
 import org.starchartlabs.majortom.event.handler.slack.Message;
 import org.starchartlabs.majortom.event.handler.slack.MessageAttachment;
+import org.starchartlabs.majortom.event.model.Notification;
+import org.starchartlabs.majortom.event.model.NotificationLevel;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
@@ -46,19 +49,38 @@ public class Handler implements RequestHandler<SNSEvent, Void> {
 
     @Override
     public Void handleRequest(SNSEvent input, Context context) {
-        // TODO make trace
-        logger.info("Received SNS event: " + input);
+        logger.trace("Received SNS event: " + input);
 
-        // SnsEvents.getMessages(input, Notification::fromJson, Notification.SUBJECT);
-
-        postMessage("Hello World!");
+        SnsEvents.getMessages(input, Notification::fromJson, Notification.SUBJECT).stream()
+        .map(this::toMessage)
+        .forEach(this::postMessage);
 
         return null;
     }
 
-    private void postMessage(String text) {
-        Message message = new Message(null, Collections.singleton(new MessageAttachment(text, AttachmentColor.GOOD)));
+    private Message toMessage(Notification notification) {
+        Message result = null;
 
+        AttachmentColor color = null;
+
+        if (NotificationLevel.DANGER.equals(notification.getLevel())) {
+            color = AttachmentColor.DANGER;
+        } else if (NotificationLevel.WARNING.equals(notification.getLevel())) {
+            color = AttachmentColor.WARNING;
+        } else if (NotificationLevel.GOOD.equals(notification.getLevel())) {
+            color = AttachmentColor.GOOD;
+        }
+
+        if (color == null) {
+            result = new Message(notification.getMessage(), null);
+        } else {
+            result = new Message(null, Collections.singleton(new MessageAttachment(notification.getMessage(), color)));
+        }
+
+        return result;
+    }
+
+    private void postMessage(Message message) {
         OkHttpClient httpClient = new OkHttpClient();
 
         HttpUrl url = HttpUrl.get(SLACK_URL_SUPPLIER.get());
