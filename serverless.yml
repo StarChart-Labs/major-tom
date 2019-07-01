@@ -52,3 +52,15 @@ functions:
         SLACK_URL_SSM: /${self:provider.stage}/${self:service}/slack/url
     events:
         - sns: ${self:custom.topic.notification}
+        
+     
+# Dynamically upload the ARN of the incoming notification topic to SSM for consumption   
+resources:
+  Resources:
+    SSMTopicArnParameter:
+      Type: AWS::SSM::Parameter
+      Properties:
+        Description: "SNS topc ARN for ${self:provider.stage} notifications to be processed by the Major Tom system"
+        Name: "/${self:provider.stage}/major-tom/aws/sns-topic-arn"
+        Type: "String"
+        Value: { Fn::Join: [":", ["arn:aws:sns", { "Ref": "AWS::Region" }, { "Ref" : "AWS::AccountId" }, "${self:custom.topic.notification}" ] ]  }

@@ -30,5 +30,3 @@ To deploy Major Tom for a given stage, the following manual setup is required on
 - On [AWS System Manager](https://console.aws.amazon.com/systems-manager), login with an admin StarChart-Labs account and create the following values in Parameter Store:
   - /${stage}/major-tom/slack/url
     - The Slack webhook URL (Created under Slack Apps -> Incoming Webhooks)
-  - /${stage}/major-tom/aws/sns-topic
-    - The topic name configured in serverless.yml for receiving events
