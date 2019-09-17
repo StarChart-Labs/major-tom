@@ -1,2 +1,4 @@
+rootProject.name = 'major-tom'
+
 include 'event-handler'
 include 'event-model'
