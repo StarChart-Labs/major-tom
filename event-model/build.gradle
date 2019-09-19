@@ -1,8 +1,8 @@
 apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
-apply plugin: 'nebula.maven-base-publish'
-apply plugin: 'nebula.maven-dependencies'
-apply plugin: 'org.starchartlabs.flare.published-project'
+apply plugin: 'org.starchartlabs.flare.managed-credentials'
+apply plugin: 'org.starchartlabs.flare.metadata-base'
+apply plugin: 'org.starchartlabs.flare.metadata-pom'
 
 description='Models events which may be sent to the Major Tom system by external clients'
 
@@ -11,6 +11,32 @@ dependencies {
     compile 'com.google.code.findbugs:jsr305'
     compile 'com.google.code.gson:gson'
     compile 'org.starchartlabs.alloy:alloy-core'
+}
+
+credentials {
+    bintray {
+        environment 'BINTRAY_USER', 'BINTRAY_API_KEY'
+    }
+}
+
+projectMetaData {
+    github {
+        repository 'StarChart-Labs', 'major-tom'
+        
+        developers file("${rootDir}/developers.properties")
+    }
+    
+    licenses {
+        mit()
+    }
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
 }
 
 // If not a remote run, publish to local only
@@ -22,26 +48,8 @@ if(!project.hasProperty('remoteDeploy')){
     }
 }
 
-publishedInfo{
-    url = 'https://github.com/StarChart-Labs/major-tom'
-  
-    scm{
-        github 'StarChart-Labs', 'major-tom'
-    }
-  
-    licenses{
-        mit('repo')
-    }
-  
-    developers{
-        github 'romeara', 'Ryan OMeara'
-    }
-}
-
 bintray {
-    user = System.getProperty('bintray_user')
-    key = System.getProperty('bintray_key')
-    publications = [ 'nebula' ]
+    publications = [ 'maven' ]
 
     if(!project.hasProperty('remoteDeploy')){
         dryRun = true
@@ -52,7 +60,7 @@ bintray {
         name = "${project.name}"
         userOrg = 'starchart-labs'
         licenses = ['MIT']
-        vcsUrl = 'https://github.com/StarChart-Labs/major-tom'
+        vcsUrl = "${projectMetaData.scm.vcsUrl}"
 
         version {
             name = "${project.version}"
@@ -63,6 +71,15 @@ bintray {
             gpg {
                 sign = true
             }
+        }
+    }
+}
+
+bintrayUpload {
+    doFirst {
+        project.bintray {
+            user = "${credentials.bintray.username}"
+            key = "${credentials.bintray.password}"
         }
     }
 }
