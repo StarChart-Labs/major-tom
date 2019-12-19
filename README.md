@@ -1,6 +1,6 @@
 # Major Tom
 
-[![Travis CI](https://img.shields.io/travis/com/StarChart-Labs/major-tom.svg?branch=master)](https://travis-ci.com/StarChart-Labs/major-tom)
+![GitHub Actions](https://github.com/StarChart-Labs/major-tom/workflows/Java%20CI/badge.svg?branch=master) [![Black Duck Security Risk](https://copilot.blackducksoftware.com/github/repos/StarChart-Labs/major-tom/branches/master/badge-risk.svg)](https://copilot.blackducksoftware.com/github/repos/StarChart-Labs/major-tom/branches/master) [![Changelog validated by Chronicler](https://chronicler.starchartlabs.org/images/changelog-chronicler-success.png)](https://chronicler.starchartlabs.org/) 
 
 AWS Lambda which monitors for SNS messages and posts notifications to Slack
 
