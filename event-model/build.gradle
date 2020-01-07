@@ -50,6 +50,8 @@ if(!project.hasProperty('remoteDeploy')){
 
 bintray {
     publications = [ 'maven' ]
+    user = System.getProperty('bintray_user')
+    key = System.getProperty('bintray_key')
 
     if(!project.hasProperty('remoteDeploy')){
         dryRun = true
@@ -71,15 +73,6 @@ bintray {
             gpg {
                 sign = true
             }
-        }
-    }
-}
-
-bintrayUpload {
-    doFirst {
-        project.bintray {
-            user = "${credentials.bintray.username}"
-            key = "${credentials.bintray.password}"
         }
     }
 }
