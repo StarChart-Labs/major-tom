@@ -48,16 +48,6 @@ if(!project.hasProperty('remoteDeploy')){
     }
 }
 
-// TODO romeara Workaround to lack of defaults on published POM for name and description, until added in flare-plugins
-project.afterEvaluate { p ->
-    publishing.publications.withType(MavenPublication.class).all { publication ->
-        publication.pom {
-            name = "${project.name}"
-            description = "${project.description}"
-        }
-    }
-}
-
 bintray {
     publications = [ 'maven' ]
     user = System.getProperty('bintray_user')
