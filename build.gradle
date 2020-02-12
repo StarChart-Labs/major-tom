@@ -33,10 +33,23 @@ allprojects{
 
 subprojects{
     apply plugin: 'java'
+    apply plugin: 'checkstyle'
     apply plugin: 'jacoco'
     apply plugin: 'maven'
     apply plugin: 'org.starchartlabs.flare.increased-test-logging'
     apply plugin: 'org.starchartlabs.flare.source-jars'
+    
+    checkstyle {
+        configFile = rootProject.file('config/checkstyle/checkstyle.xml')
+        configProperties = [ 'checkstyle.config.dir' : rootProject.file('config/checkstyle') ]
+        toolVersion = '8.29'
+    }
+     
+    task checkstyleAll{}
+     
+    tasks.withType(Checkstyle).all { checkstyleTask -> checkstyleAll.dependsOn checkstyleTask }
+     
+    check.dependsOn checkstyleAll
 
     // Setup default test behavior, including failure logging
     test {
