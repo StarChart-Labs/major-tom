@@ -1,14 +1,12 @@
-buildscript {
-    repositories {
-        maven { url 'https://plugins.gradle.org/m2/' }
-    }
-    dependencies {
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
-        classpath 'org.starchartlabs.flare:flare-plugins:1.0.0'
-    }
-}
+plugins {
+    id 'org.starchartlabs.flare.merge-coverage-reports' version '1.0.0'
 
-apply plugin: 'org.starchartlabs.flare.merge-coverage-reports'
+    // Plug-ins not applied at the root level, but used in sub-projects
+    id 'com.jfrog.bintray' version '1.8.5' apply false
+    id 'org.starchartlabs.flare.dependency-constraints' version '1.0.0' apply false
+    id 'org.starchartlabs.flare.increased-test-logging' version '1.0.0' apply false
+    id 'org.starchartlabs.flare.source-jars' version '1.0.0' apply false
+}
 
 allprojects{
     apply plugin: 'eclipse'
