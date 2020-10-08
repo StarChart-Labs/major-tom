@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Changed
+- Updated AWS dependencies to 1.11.797
+- Updated jackson databind to 2.11.0
+- Updated OkHttp to 4.8.0
+- Updated Alloy to 1.0.0
+- Updated Machete to 1.0.0
 - Add Checkstyle code quality validation to build process
 
 ## [0.2.2]
