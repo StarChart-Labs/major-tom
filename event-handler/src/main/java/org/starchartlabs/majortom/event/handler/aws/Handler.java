@@ -93,7 +93,7 @@ public class Handler implements RequestHandler<SNSEvent, Void> {
 
         Request request = new Request.Builder()
                 .header("User-Agent", "StarChart-Labs/Major-Tom")
-                .post(RequestBody.create(MediaType.get("application/json"), message.toJson()))
+                .post(RequestBody.create(message.toJson(), MediaType.get("application/json")))
                 .url(url)
                 .build();
 
