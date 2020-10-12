@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Updated Alloy to 1.0.0
 - Updated Machete to 1.0.0
 - Add Checkstyle code quality validation to build process
+- Add automated validation of copyright statements
 
 ## [0.2.2]
 ### Changed
