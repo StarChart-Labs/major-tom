@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Updated Machete to 1.0.0
 - Add Checkstyle code quality validation to build process
 - Add automated validation of copyright statements
+- Switch dependency on `com.google.code.findbugs:jsr305` to compileOnly to avoid pulling in as a transitive dependency to consuming projects
 
 ## [0.2.2]
 ### Changed

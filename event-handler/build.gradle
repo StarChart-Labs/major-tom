@@ -2,11 +2,11 @@ description='Main processing logic for Major Tom system'
 
 //Dependency versions managed in $rootDir/dependencies.properties
 dependencies {
-    api project(':event-model')
+    compileOnly 'com.google.code.findbugs:jsr305'
     
+    api project(':event-model')
     api 'com.amazonaws:aws-java-sdk-ssm'
     api 'com.amazonaws:aws-lambda-java-core'
-    api 'com.google.code.findbugs:jsr305'
     api 'org.slf4j:slf4j-api'
     api 'com.squareup.okhttp3:okhttp'
     api 'org.starchartlabs.machete:machete-sns'

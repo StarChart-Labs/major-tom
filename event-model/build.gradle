@@ -8,7 +8,8 @@ description='Models events which may be sent to the Major Tom system by external
 
 //Dependency versions managed in $rootDir/dependencies.properties
 dependencies {
-    api 'com.google.code.findbugs:jsr305'
+    compileOnly 'com.google.code.findbugs:jsr305'
+    
     api 'com.google.code.gson:gson'
     api 'org.starchartlabs.alloy:alloy-core'
 }

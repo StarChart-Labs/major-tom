@@ -4,6 +4,8 @@
 
 AWS Lambda which monitors for SNS messages and posts notifications to Slack
 
+For information on migrating between major versions, see the [migration guide](./docs/MIGRATION.md)
+
 ## Contributing
 
 Information for how to contribute to Chronicler can be found in [the contribution guidelines](./docs/CONTRIBUTING.md)
