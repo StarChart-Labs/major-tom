@@ -9,11 +9,10 @@
 plugins:
   - serverless-iam-roles-per-function
   - serverless-pseudo-parameters
-
 service: major-tom
 
 # Pin your service to only deploy with a specific Serverless version
-frameworkVersion: "=1.31.0"
+frameworkVersion: "=2.54.0"
 
 provider:
   stage: "${opt:stage, 'dev'}"

@@ -25,6 +25,12 @@ Deployment of Major Tom is done in the context of a "stage". A "stage" is someth
 
 # One Time Setup
 
+First, it is necessary to install `serverless` and then the plug-ins needed for major-tom
+
+- [Install serverless](https://www.serverless.com/framework/docs/providers/aws/guide/installation/)
+    - This includes configuring serverless keys for AWS
+- Install the below plugins via [serverless plugin install](https://www.serverless.com/framework/docs/providers/aws/cli-reference/plugin-install/)
+
 To deploy Major Tom for a given stage, the following manual setup is required once:
 
 - On [AWS System Manager](https://console.aws.amazon.com/systems-manager), login with an admin StarChart-Labs account and create the following values in Parameter Store:
