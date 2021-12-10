@@ -1,6 +1,5 @@
 apply plugin: 'maven-publish'
-apply plugin: 'com.jfrog.bintray'
-apply plugin: 'org.starchartlabs.flare.managed-credentials'
+apply plugin: 'signing'
 apply plugin: 'org.starchartlabs.flare.metadata-base'
 apply plugin: 'org.starchartlabs.flare.metadata-pom'
 
@@ -12,12 +11,6 @@ dependencies {
     
     api 'com.google.code.gson:gson'
     api 'org.starchartlabs.alloy:alloy-core'
-}
-
-credentials {
-    bintray {
-        environment 'BINTRAY_USER', 'BINTRAY_API_KEY'
-    }
 }
 
 projectMetaData {
@@ -36,8 +29,42 @@ publishing {
     publications {
         maven(MavenPublication) {
             from components.java
+            
+            repositories {
+                // If not a remote run, publish to local only
+                if(!project.hasProperty('remoteDeploy')){
+                    mavenLocal()
+                    
+                    project.logger.lifecycle('Configured for local publishing')
+                }else{
+                    maven {
+                        if(!version.endsWith("SNAPSHOT")){
+                            url "https://oss.sonatype.org/service/local/staging/deploy/maven2"
+                            
+                            project.logger.lifecycle('Configured for release publishing')
+                        }else{
+                            url "https://oss.sonatype.org/content/repositories/snapshots/"
+                            
+                            project.logger.lifecycle('Configured for snapshot publishing')
+                        }
+                        
+                        credentials {
+                            username System.getenv("OSSRH_USERNAME")
+                            password System.getenv("OSSRH_PASSWORD")
+                        }
+                    }
+                }
+            }
         }
     }
+}
+
+signing {
+    required { project.hasProperty('remoteDeploy') || project.hasProperty('sign') }
+    
+    useInMemoryPgpKeys(System.getenv("OSSRH_SIGNING_KEY"), System.getenv("OSSRH_SIGNING_PASSWORD"))
+
+    sign publishing.publications.maven
 }
 
 // If not a remote run, publish to local only
@@ -45,35 +72,6 @@ if(!project.hasProperty('remoteDeploy')){
     publishing {
         repositories {
             mavenLocal()
-        }
-    }
-}
-
-bintray {
-    publications = [ 'maven' ]
-    user = System.getProperty('bintray_user')
-    key = System.getProperty('bintray_key')
-
-    if(!project.hasProperty('remoteDeploy')){
-        dryRun = true
-    }
-
-    pkg {
-        repo = 'major-tom'
-        name = "${project.name}"
-        userOrg = 'starchart-labs'
-        licenses = ['MIT']
-        vcsUrl = "${projectMetaData.scm.vcsUrl}"
-
-        version {
-            name = "${project.version}"
-            desc = "${project.name} release ${project.version} final"
-            released  = new Date()
-            vcsTag = "${project.version}"
-
-            gpg {
-                sign = true
-            }
         }
     }
 }
