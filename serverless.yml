@@ -8,7 +8,6 @@
 
 plugins:
   - serverless-iam-roles-per-function
-  - serverless-pseudo-parameters
 service: major-tom
 
 # Pin your service to only deploy with a specific Serverless version
@@ -46,7 +45,7 @@ functions:
        Action:
          - "ssm:GetParameter"
          - "ssm:GetParametersByPath"
-       Resource: { Fn::Join: [":", [ "arn:aws:ssm", { "Ref" : "AWS::Region" }, { "Ref" : "AWS::AccountId" }, "parameter/${self:provider.stage}/${self:service}/slack/url" ]] }
+       Resource: "arn:aws:ssm:${aws:region}:${aws:accountId}:parameter/${self:provider.stage}/${self:service}/slack/url"
     environment:
         SLACK_URL_SSM: /${self:provider.stage}/${self:service}/slack/url
     events:
@@ -62,4 +61,4 @@ resources:
         Description: "SNS topc ARN for ${self:provider.stage} notifications to be processed by the Major Tom system"
         Name: "/${self:provider.stage}/major-tom/aws/sns-topic-arn"
         Type: "String"
-        Value: { Fn::Join: [":", ["arn:aws:sns", { "Ref": "AWS::Region" }, { "Ref" : "AWS::AccountId" }, "${self:custom.topic.notification}" ] ]  }
+        Value: "arn:aws:sns:${aws:region}:${aws:accountId}:${self:custom.topic.notification}"
