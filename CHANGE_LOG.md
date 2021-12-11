@@ -14,8 +14,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Updated override of com.fasterxml.jackson.core:jackson-databind from 2.11.0 to 2.12.4
 - Updated com.google.code.gson:gson from 2.8.6 to 2.8.8
 - Updated com.squareup.okhttp3:okhttp from 4.8.0 to 4.9.1
-- Updated org.apache.logging.log4j:log4j-core from 2.13.3 to 2.14.1
-- Updated org.apache.logging.log4j:log4j-slf4j-impl from 2.13.3 to 2.14.1
+- Updated org.apache.logging.log4j:log4j-core from 2.13.3 to 2.15.0
+- Updated org.apache.logging.log4j:log4j-slf4j-impl from 2.13.3 to 2.15.0
 - Updated org.starchartlabs.alloy:alloy-core from 1.0.0 to 1.0.1
 - Updated org.starchartlabs.machete:machete-sns from 1.0.0 to 1.0.1
 - Updated org.starchartlabs.machete:machete-ssm from 1.0.0 to 1.0.1
