@@ -5,7 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-
+### Changed
+- Switched from psuedo-parameters serverless plugin to native region/accountId variable substitution
 - Updated com.amazonaws:aws-java-sdk-cloudwatch from 1.11.797 to 1.12.52
 - Updated com.amazonaws:aws-java-sdk-sns from 1.11.797 to 1.12.52
 - Updated com.amazonaws:aws-java-sdk-ssm from 1.11.797  to 1.12.52
