@@ -33,5 +33,4 @@ To run a serverless deployment, you must npm install a couple serverless plug-in
 ```
 npm install serverless
 npm install --save-dev serverless-iam-roles-per-function
-npm install --save-dev serverless-pseudo-parameters
 ```
