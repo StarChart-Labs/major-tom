@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [1.0.2]
 ### Changed
 - Updated org.apache.logging.log4j:log4j-core from 2.15.0 to 2.16.0
 - Updated org.apache.logging.log4j:log4j-slf4j-impl from 2.15.0 to 2.16.0
